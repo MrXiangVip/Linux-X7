@@ -1,0 +1,1 @@
+由于uboot里有同名文件，window下又不支持，所以以压缩包的形式提交，而且uboot基本不怎么动，目前主要修改了mx7ulp_ai_m4boot_defconfig配置文件

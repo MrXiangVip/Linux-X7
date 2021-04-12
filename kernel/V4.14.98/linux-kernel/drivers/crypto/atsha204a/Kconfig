@@ -1,0 +1,6 @@
+
+menuconfig CRYPTO_ATSHA204A_SUPPORT
+	bool "ATSHA204A Crypto Support"
+	default y
+	help
+	  ATSHA204A Crypto IC Support.

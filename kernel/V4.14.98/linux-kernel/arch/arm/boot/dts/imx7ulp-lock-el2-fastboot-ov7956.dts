@@ -1,0 +1,83 @@
+/*
+ * Copyright 2016 Freescale Semiconductor, Inc.
+ * Copyright 2017 NXP.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+
+#include "imx7ulp-lock-el2.dts"
+
+&lpi2c5 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c5>;
+	pinctrl-1 = <&pinctrl_lpi2c5>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	ov7956: ov7956@40 {
+		compatible = "ovti,ov7956";
+		reg = <0x40>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_camera_ov7956>;
+		clocks = <&clks IMX7ULP_CLK_DUMMY>;
+		clock-names = "csi_mclk";
+		pwn-gpios = <&gpio_ptf 5 GPIO_ACTIVE_LOW>;  /* merge patch for x7 190709: change to reset-gpio*/
+		rst-gpios = <&gpio_ptf 4 GPIO_ACTIVE_HIGH>;  /* merge patch for x7 190709 */
+		csi_id = <0>;
+		mclk = <24000000>;
+		mclk_source = <0>;
+		status = "okay";
+
+		port {
+			ov7956_ep: endpoint {
+				remote-endpoint = <&viu_ep>;
+			};
+		};
+	};
+};
+
+&viu {
+	status = "okay";
+
+	port {
+		viu_ep: endpoint {
+			remote-endpoint = <&ov7956_ep>;
+		};
+	};
+};
+
+&usbotg1 {
+	vbus-supply = <&reg_usb_otg1_vbus>;
+	extcon = <0>, <&extcon_usb1>;
+	srp-disable;
+	hnp-disable;
+	adp-disable;
+	status = "okay";
+};
+
+&usbphy1 {
+	tx-d-cal = <0xc>;
+};
+&lpi2c6 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c6>;
+	pinctrl-1 = <&pinctrl_lpi2c6_sleep>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	atsha204a: atsha204a@64 {
+		compatible = "atmel,atsha204a";
+		reg = <0x64>;
+		sda-gpios = <&gpio_ptc 9 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
+};
+
+

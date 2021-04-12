@@ -1,0 +1,27 @@
+/*
+ * Copyright 2016 Freescale Semiconductor, Inc.
+ * Copyright 2017 NXP.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/dts-v1/;
+
+#include "imx7ulp-lock-fastboot.dts"
+#include <dt-bindings/input/input.h>
+
+&usbotg1 {
+	vbus-supply = <&reg_usb_otg1_vbus>;
+	extcon = <0>, <&extcon_usb1>;
+	srp-disable;
+	hnp-disable;
+	adp-disable;
+	status = "okay";
+};
+
+&usbphy1 {
+	tx-d-cal = <0xc>;
+};
+

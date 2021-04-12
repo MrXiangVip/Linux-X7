@@ -1,0 +1,170 @@
+/*
+ * Copyright 2018 NXP Semiconductor, Inc. All rights reserved.
+ */
+
+/*
+ * The code contained herein is licensed under the GNU General Public
+ * License. You may obtain a copy of the GNU General Public License
+ * Version 2 or later at the following locations:
+ *
+ * http://www.opensource.org/licenses/gpl-license.html
+ * http://www.gnu.org/copyleft/gpl.html
+ */
+
+#ifndef __CONFIG_H__
+#define __CONFIG_H__
+
+#include <linux/videodev2.h>
+#include "RSCommon.h"
+
+// Camera parameters
+#define CFG_CAMERA_CROP_OUTPUT					0
+#define CFG_CAMERA_SCALE_OUTPUT					0
+
+#define CFG_IR_CAM_WIDTH						864
+#define CFG_IR_CAM_HEIGHT						491
+#define CFG_DEPTH_CAM_WIDTH						216
+#define CFG_DEPTH_CAM_HEIGHT					124
+
+/* Roate needed */
+#define CFG_DEPTH_FRAME_WIDTH 					(CFG_DEPTH_CAM_HEIGHT - 2)
+#define CFG_DEPTH_FRAME_HEIGHT 					(CFG_DEPTH_CAM_WIDTH)
+#define CFG_DEPTH_FRAME_BPP						16
+#define CFG_DEPTH_FRAME_SIZE					(CFG_DEPTH_FRAME_WIDTH * CFG_DEPTH_FRAME_HEIGHT * CFG_DEPTH_FRAME_BPP / 8)
+
+#define CFG_ENABLE_DEPTH_CLKWISE_ROTATE			1
+
+#if CFG_ENABLE_DEPTH_CLKWISE_ROTATE
+	#define CFG_DEPTH_CLKWISE_ROTATE_90				0
+	#define CFG_DEPTH_CLKWISE_ROTATE_180			0
+	#define CFG_DEPTH_CLKWISE_ROTATE_270			1
+	#if ((CFG_DEPTH_CLKWISE_ROTATE_90 + CFG_DEPTH_CLKWISE_ROTATE_180 + CFG_DEPTH_CLKWISE_ROTATE_270) > 1)
+		#error "Only one of depth rotate mode can be defined!"
+	#endif
+#endif
+
+/* Roate needed */
+#define CFG_IR_FRAME_WIDTH 						(CFG_IR_CAM_HEIGHT - 3)
+#define CFG_IR_FRAME_HEIGHT 					(CFG_IR_CAM_WIDTH)
+#define CFG_IR_FRAME_BPP						8	
+#define CFG_IR_FRAME_SIZE						(CFG_IR_FRAME_WIDTH * CFG_IR_FRAME_HEIGHT * CFG_IR_FRAME_BPP / 8)
+
+#define CFG_ENABLE_IR_CLKWISE_ROTATE			1
+
+#if CFG_ENABLE_IR_CLKWISE_ROTATE
+	#define CFG_IR_CLKWISE_ROTATE_90				0
+	#define CFG_IR_CLKWISE_ROTATE_180				0
+	#define CFG_IR_CLKWISE_ROTATE_270				1
+	#if ((CFG_IR_CLKWISE_ROTATE_90 + CFG_IR_CLKWISE_ROTATE_180 + CFG_IR_CLKWISE_ROTATE_270) > 1)
+		#error "Only one of ir rotate mode can be defined!"
+	#endif
+#endif
+
+#define CFG_IR_FPS								30
+#define CFG_DEPTH_FPS							30
+
+#define CFG_USE_ALTERNATIVE_MODE				1
+
+// Data base related
+#define CFG_FACE_DB_SQLITE3_SUPPORT				(0)
+
+#if CFG_FACE_DB_SQLITE3_SUPPORT
+	#define CFG_FACE_DB_NAME					"FACEDB"
+	#define CFG_FACE_DB_PATH					"./facefeature.db"
+	#define CFG_FACE_FEATURE_MAXLEN				(sizeof(float) * DEEPFACE_FEATURE_LENGTH)
+#else
+	#define CFG_READSENSE_DB_PATH				"./readsense.db"
+#endif
+
+// Liveness related
+#define CFG_LIVENESS_DETECT_SUPPORT				1
+#define CFG_FACE_MONO_LIVENESS					(0)
+#define CFG_FACE_BIN_LIVENESS					(1)
+#if CFG_LIVENESS_DETECT_SUPPORT
+	#if (CFG_FACE_MONO_LIVENESS + CFG_FACE_BIN_LIVENESS > 1)
+		#error "CFG_FACE_MONO_LIVENESS and CFG_FACE_BIN_LIVENESS can't be defined at the same time!"
+	#elif (CFG_FACE_MONO_LIVENESS + CFG_FACE_BIN_LIVENESS == 0)
+		#error "One of CFG_FACE_MONO_LIVENESS and CFG_FACE_BIN_LIVENESS need to be defined!"
+	#endif
+#else
+	#if (CFG_FACE_MONO_LIVENESS + CFG_FACE_BIN_LIVENESS > 0)
+		#error "CFG_FACE_MONO_LIVENESS and CFG_FACE_BIN_LIVENESS should not be defined without CFG_LIVENESS_DETECT_SUPPORT!"
+	#endif
+#endif
+
+// Face library related
+//#define CFG_FACE_LIB_FRAME_WIDTH				((CFG_DEPTH_FRAME_WIDTH  - 2)* 4)
+#define CFG_FACE_LIB_FRAME_WIDTH				(CFG_DEPTH_FRAME_WIDTH)
+#define CFG_FACE_LIB_FRAME_HEIGHT				(CFG_DEPTH_FRAME_HEIGHT)
+
+#define CFG_FACE_LIB_CLKWISE_ROTATE				RS_IMG_CLOCKWISE_ROTATE_270
+
+#define CFG_FRAME_SCALE_MUL						(CFG_FACE_LIB_FRAME_WIDTH / CFG_DEPTH_FRAME_WIDTH)
+
+#define CFG_FACE_LIB_LM_VER						1
+#define CFG_FACE_LIB_LICENSE_PATH				"2891c3af_arm_linux_chip_license_content.lic"
+
+// PIX_FORMAT_GRAY, PIX_FORMAT_BGRA8888 and PIX_FORMAT_BGR888 are from RS header.
+//#define CFG_FACE_LIB_PIX_FMT					0 //PIX_FORMAT_GRAY
+#define CFG_FACE_LIB_PIX_FMT					PIX_FORMAT_GRAY
+
+#if (CFG_FACE_LIB_PIX_FMT == 3) //PIX_FORMAT_BGRA8888
+	#define CFG_FACE_LIB_PIX_FMT_BPP			32
+#elif (CFG_FACE_LIB_PIX_FMT == 1) //PIX_FORMAT_BGR888
+	#define CFG_FACE_LIB_PIX_FMT_BPP			24
+#elif (CFG_FACE_LIB_PIX_FMT == 0) //PIX_FORMAT_GRAY
+	#define CFG_FACE_LIB_PIX_FMT_BPP			8
+#else
+	#define CFG_FACE_LIB_PIX_FMT_BPP			16
+#endif
+
+#define CFG_FACE_LIB_DEPTH_PIX_FMT_BPP			16
+
+#define CFG_FACE_LIB_IR_IMAGE_SIZE	\
+		(CFG_FACE_LIB_FRAME_WIDTH * CFG_FACE_LIB_FRAME_HEIGHT * CFG_FACE_LIB_PIX_FMT_BPP / 8)
+#define CFG_FACE_LIB_DEPTH_IMAGE_SIZE	\
+		(CFG_FACE_LIB_FRAME_WIDTH * CFG_FACE_LIB_FRAME_HEIGHT * CFG_FACE_LIB_DEPTH_PIX_FMT_BPP / 8)
+
+#define CFG_FACE_FEATURE_RECOGNIZE_SIMILAR_THRESHHOLD		70
+#define CFG_FACE_FEATURE_REGISTER_SIMILAR_THRESHHOLD		60
+
+#define CFG_FACE_QUALITY_THRESHHOLD				50
+
+#define CFG_FACE_ANGLE							15
+
+// Preview related
+#define CFG_ENABLE_PREVIEW						0
+#define CFG_PREVIRW_LCD_BPP						32
+
+#define CFG_ENABLE_CAM_LIBUVC					1
+#if CFG_ENABLE_CAM_LIBUVC
+	#define CFG_DEVICE_VENDOR_ID				0x1080
+	#define CFG_DEVICE_PRODUCT_ID				0x1063
+#endif
+
+// Camera configs
+#define CFG_ENABLE_CAM_I2C						0
+#if CFG_ENABLE_CAM_I2C
+	#define CFG_CAM_I2C_DEV						"/dev/i2c-0"
+	#define CFG_CAM_I2C_SLAVE_ADDR				0x10
+	#define CFG_CAM_ID							0x6010
+#endif
+#define CFG_CAM_CONFIG_PATH						"/etc/config1.ini"
+
+// Frame buffer related
+#define CFG_USE_INTERNAL_BUFFER_QUEUE			0
+#define CFG_RINGBUFFER_SIZE						(8 * 0x100000) // 8M
+
+#define CFG_ENABLE_CAM_V4L2						0
+#if CFG_ENABLE_V4L2_SUPPORT
+	#define CFG_V4L2_PIX_FMT					V4L2_PIX_FMT_RGB565	
+	#define CFG_V4L2_BUF_NUM					4
+#endif
+
+#define CFG_PER_TIME_CAL_OVERALL				0
+#define CFG_PER_TIME_CAL_EVERYSTEP				0
+#if CFG_PER_TIME_CAL_OVERALL && CFG_PER_TIME_CAL_EVERYSTEP
+	#error "CFG_PER_TIME_CAL_OVERALL and CFG_PER_TIME_CAL_EVERYSTEP can't be defined at the same time!"
+#endif
+
+#endif

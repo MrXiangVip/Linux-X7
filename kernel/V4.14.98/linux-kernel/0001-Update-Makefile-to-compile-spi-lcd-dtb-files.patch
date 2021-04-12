@@ -1,0 +1,30 @@
+From 02e3fc723fd355bc08b05e110a101f44cc305605 Mon Sep 17 00:00:00 2001
+From: Kane Jiang <jian.jiang@nxp.com>
+Date: Wed, 18 Sep 2019 10:47:46 +0800
+Subject: [PATCH] Update Makefile to compile spi lcd dtb files
+
+Signed-off-by: Kane Jiang <jian.jiang@nxp.com>
+---
+ arch/arm/boot/dts/Makefile | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index 2582979..0acdb9e 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -664,6 +664,12 @@ dtb-$(CONFIG_SOC_IMX7ULP) += \
+ 	imx7ulp-lock-el2-fastboot-mx6k-il005.dtb \
+ 	imx7ulp-lock-el2-fastboot-mx6k-atsha204a.dtb \
+ 	imx7ulp-lock-el2-fastboot-ov7956.dtb \
++	imx7ulp-lock-locome400.dtb \
++	imx7ulp-lock-locome400-fastboot-mx6k.dtb \
++	imx7ulp-lock-locome400-fastboot-qh430mr.dtb \
++	imx7ulp-lock-locome400-fastboot-mx6k-il005.dtb \
++	imx7ulp-lock-locome400-fastboot-mx6k-atsha204a.dtb \
++	imx7ulp-lock-locome400-fastboot-ov7956.dtb \
+ 	imx7ulp-toy.dtb \
+ 	imx7ulp-toy-emmc.dtb \
+ 	imx7ulp-toy-sd1.dtb \
+-- 
+2.7.4
+

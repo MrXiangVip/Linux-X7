@@ -1,0 +1,55 @@
+/*
+ * Copyright 2018 NXP Semiconductor, Inc. All rights reserved.
+ */
+
+/*
+ * The code contained herein is licensed under the GNU General Public
+ * License. You may obtain a copy of the GNU General Public License
+ * Version 2 or later at the following locations:
+ *
+ * http://www.opensource.org/licenses/gpl-license.html
+ * http://www.gnu.org/copyleft/gpl.html
+ */
+
+#include "face_alg.h"
+#include "libsimplelog.h"
+#include <string.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
+
+/* Face library init */
+int32_t face_alg_init(void)
+{
+	return RET_OK;
+}
+
+/* Face detect API, use color image to detect liveness and face */
+/* RET: > 0 face id, < 0 error */
+int32_t face_alg_detect(face_image_info_t *color_image)
+{
+	return 1;
+}
+
+/* Face detect API, color image for recognize, depth image for liveness */
+/* RET: > 0 face id, < 0 error */
+int32_t face_alg_detect_depth(face_image_info_t *color_image, face_image_info_t *depth_image)
+{
+	return 1;
+}
+
+/* Face register API, use color image to register face */
+/* RET: 0 success, < 0 error */
+int32_t face_alg_register(face_image_info_t *color_image)
+{
+	return RET_OK;
+}
+
+/* Face register API, use color image to register face, including liveness check */
+/* RET: 0 success, < 0 error */
+int32_t face_alg_register_depth(face_image_info_t *color_image, face_image_info_t *depth_image)
+{
+	return RET_OK;
+}
+
+

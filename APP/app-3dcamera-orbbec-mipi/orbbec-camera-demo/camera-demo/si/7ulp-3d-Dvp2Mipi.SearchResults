@@ -1,0 +1,5 @@
+---- RCVMSG_HEAD_MARK Matches (4 in 3 files) ----
+Face_loop.cpp (x:\imx7ulp\recipes-demo\app-3dcamera-orbbec-mipi\orbbec-camera-demo\camera-demo):		if(HeadMark != RCVMSG_HEAD_MARK)
+Function.cpp (x:\imx7ulp\recipes-demo\app-3dcamera-orbbec-mipi\orbbec-camera-demo\camera-demo):	if (*HeadMark != RCVMSG_HEAD_MARK)
+Function.cpp (x:\imx7ulp\recipes-demo\app-3dcamera-orbbec-mipi\orbbec-camera-demo\camera-demo):			*HeadMark, RCVMSG_HEAD_MARK);
+Function.h (x:\imx7ulp\recipes-demo\app-3dcamera-orbbec-mipi\orbbec-camera-demo\camera-demo):#define RCVMSG_HEAD_MARK				(0x4D34)  /*M4*/

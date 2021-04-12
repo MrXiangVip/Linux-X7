@@ -1,0 +1,53 @@
+/*
+ * Copyright 2016 Freescale Semiconductor, Inc.
+ * Copyright 2017 NXP.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+
+#include "imx7ulp-lock-locome400.dts"
+
+&lpi2c5 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c5>;
+	pinctrl-1 = <&pinctrl_lpi2c5>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	mx6000: mx6000@0e {
+		compatible = "orbbec,mx6000";
+		reg = <0x0e>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_camera_mx6k>;
+		clocks = <&clks IMX7ULP_CLK_DUMMY>;
+		clock-names = "csi_mclk";
+		pwn-gpios = <&gpio_ptf 5 GPIO_ACTIVE_LOW>;
+		rst-gpios = <&gpio_ptf 4 GPIO_ACTIVE_HIGH>;
+		//ldo-gpios = <&gpio_pte 6 GPIO_ACTIVE_HIGH>;
+		csi_id = <0>;
+		mclk = <24000000>;
+		mclk_source = <0>;
+		status = "okay";
+		port {
+			mx6000_ep: endpoint {
+				remote-endpoint = <&viu_ep>;
+			};
+		};
+	};
+};
+
+&viu {
+	status = "okay";
+
+	port {
+		viu_ep: endpoint {
+			remote-endpoint = <&mx6000_ep>;
+		};
+	};
+};
+

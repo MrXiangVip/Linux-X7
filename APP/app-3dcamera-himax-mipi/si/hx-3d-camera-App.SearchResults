@@ -1,0 +1,4 @@
+---- APP_UPGRADE_USB Matches (3 in 2 files) ----
+Custom.h:#define APP_UPGRADE_USB
+Faceloop.cpp:#ifdef APP_UPGRADE_USB
+Faceloop.cpp:#ifdef APP_UPGRADE_USB

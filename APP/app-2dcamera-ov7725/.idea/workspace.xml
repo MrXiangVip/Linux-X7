@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cd8d66dd-4c50-4ec3-996d-efc96962a6b2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectId" id="1qEDGsW4N82KGSIW4nTWkfQRIsW" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../branches-sqlite/APP/app-2dcamera-ov7725" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/DB" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/sqlite3" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd8d66dd-4c50-4ec3-996d-efc96962a6b2" name="Default Changelist" comment="" />
+      <created>1616635762704</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616635762704</updated>
+      <workItem from="1616635763778" duration="2520000" />
+      <workItem from="1616639420553" duration="3124000" />
+      <workItem from="1616657733963" duration="28172000" />
+      <workItem from="1616831526362" duration="2794000" />
+      <workItem from="1616838570053" duration="2430000" />
+      <workItem from="1616979262554" duration="20531000" />
+      <workItem from="1617066741929" duration="333000" />
+      <workItem from="1617067656426" duration="12562000" />
+      <workItem from="1617151108860" duration="3191000" />
+      <workItem from="1617156184403" duration="14979000" />
+      <workItem from="1617258474502" duration="1773000" />
+      <workItem from="1617268273189" duration="2889000" />
+      <workItem from="1617331071070" duration="874000" />
+      <workItem from="1617704797660" duration="75313000" />
+      <workItem from="1618028490006" duration="365000" />
+      <workItem from="1618028863964" duration="12641000" />
+      <workItem from="1618188089198" duration="2415000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

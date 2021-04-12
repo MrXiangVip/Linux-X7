@@ -1,0 +1,105 @@
+/*
+ * Copyright 2016 Freescale Semiconductor, Inc.
+ * Copyright 2017 NXP.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+
+#include "imx7ulp-lock-locome400.dts"
+
+&lpi2c4 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c4>;
+	pinctrl-1 = <&pinctrl_lpi2c4>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	/*
+	qh430mr: qh430mr@38 {
+		compatible = "himax,qh430mr";
+		reg = <0x38>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_camera_qh430mr>;
+		clocks = <&clks IMX7ULP_CLK_DUMMY>;
+		clock-names = "csi_mclk";
+		rst-gpios = <&gpio_ptf 5 GPIO_ACTIVE_HIGH>;
+		bridge-rst-gpios = <&gpio_ptf 4 GPIO_ACTIVE_HIGH>;
+		csi_id = <0>;
+		mclk = <24000000>;
+		mclk_source = <0>;
+		status = "okay";
+		port {
+			qh430mr_ep: endpoint {
+				remote-endpoint = <&viu_cam_ep>;
+			};
+		};
+	};
+	*/
+};
+
+&lpi2c5{
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c5>;
+	pinctrl-1 = <&pinctrl_lpi2c5>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	qh430mr: qh430mr@0e {
+		compatible = "himax,qh430mr";
+		reg = <0x0e>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_camera_qh430mr>;
+		clocks = <&clks IMX7ULP_CLK_DUMMY>;
+		clock-names = "csi_mclk";
+		rst-gpios = <&gpio_ptf 5 GPIO_ACTIVE_HIGH>;
+		bridge-rst-gpios = <&gpio_ptf 4 GPIO_ACTIVE_HIGH>;
+		csi_id = <0>;
+		mclk = <24000000>;
+		mclk_source = <0>;
+		status = "okay";
+		port {
+			qh430mr_ep: endpoint {
+				remote-endpoint = <&viu_cam_ep>;
+			};
+		};
+	};
+
+	/*
+	tc358746: tc358746@0e {
+		compatible = "toshiba,tc358746";
+		reg = <0x0e>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_camera_tc358746>;
+		clocks = <&clks IMX7ULP_CLK_DUMMY>;
+		clock-names = "csi_mclk";
+		rst-gpios = <&gpio_ptf 4 GPIO_ACTIVE_HIGH>;
+		csi_id = <0>;
+		mclk = <24000000>;
+		mclk_source = <0>;
+		status = "okay";
+		port {
+			tc358746_ep: endpoint {
+				remote-endpoint = <&viu_dvp_ep>;
+			};
+		};
+	};
+	*/
+};
+
+&viu {
+	status = "okay";
+
+	port {
+		viu_cam_ep: endpoint {
+			remote-endpoint = <&qh430mr_ep>;
+		};
+	};
+};
+

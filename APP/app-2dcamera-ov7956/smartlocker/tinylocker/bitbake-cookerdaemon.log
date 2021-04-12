@@ -1,0 +1,208 @@
+--- Starting bitbake server pid 71842 at 2019-02-14 02:48:07.879009 ---
+Started bitbake server pid 71842
+DEBUG: Found bblayers.conf (/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/conf/bblayers.conf)
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta-poky
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-oe
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-multimedia
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale
+Entering server connection loop
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale-3rdparty
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale-distro
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-browser
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-gnome
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-networking
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-python
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-filesystems
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-qt5
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:740: including conf/abi_version.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:741: including conf/site.conf
+DEBUG: CONF file 'conf/site.conf' not found
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:742: including conf/auto.conf
+DEBUG: CONF file 'conf/auto.conf' not found
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:743: including conf/local.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:744: including conf/multiconfig/default.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:745: including conf/machine/imx7ulpevk.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/imx7ulpevk.conf:9: including conf/machine/include/imx-base.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/include/imx-base.inc:3: including conf/machine/include/fsl-default-settings.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/include/imx-base.inc:4: including conf/machine/include/fsl-default-versions.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/imx7ulpevk.conf:10: including conf/machine/include/tune-cortexa7.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/tune-cortexa7.inc:3: including conf/machine/include/arm/arch-armv7ve.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7ve.inc:8: including conf/machine/include/arm/arch-armv7a.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7a.inc:8: including conf/machine/include/arm/arch-armv6.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv6.inc:8: including conf/machine/include/arm/arch-armv5-dsp.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5-dsp.inc:4: including conf/machine/include/arm/arch-armv5.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5.inc:8: including conf/machine/include/arm/arch-armv4.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv4.inc:15: including conf/machine/include/arm/arch-arm.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv4.inc:16: including conf/machine/include/arm/feature-arm-thumb.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5.inc:9: including conf/machine/include/arm/feature-arm-vfp.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7a.inc:9: including conf/machine/include/arm/feature-arm-neon.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:746: including conf/machine-sdk/x86_64.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:747: including conf/distro/fsl-imx-wayland.conf
+Accepting [<socket.socket fd=7, family=AddressFamily.AF_UNIX, type=SocketKind.SOCK_STREAM, proto=0, laddr=bitbake.sock>]
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/fsl-imx-wayland.conf:3: including conf/distro/include/fsl-imx-base.inc
+Connecting Client
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/fsl-imx-wayland.conf:4: including conf/distro/include/fsl-imx-preferred-env.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:748: including conf/distro/defaultsetup.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:1: including conf/distro/include/default-providers.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:2: including conf/distro/include/default-versions.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:3: including conf/distro/include/default-distrovars.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:4: including conf/distro/include/world-broken.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:7: including conf/distro/include/tcmode-default.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/include/tcmode-default.inc:71: including conf/distro/include/as-needed.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:10: including conf/distro/include/tclibc-glibc.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:12: including conf/distro/include/uninative-flags.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:749: including conf/documentation.conf
+Running command ['setFeatures', [2]]
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:750: including conf/licenses.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:751: including conf/sanity.conf
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/patch.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:4)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/terminal.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/patch.bbclass:11)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/staging.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:5)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/mirrors.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:7)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/utils.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:8)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/utility-tasks.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:9)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/metadata_scm.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:10)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/logging.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:11)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale/classes/machine-overrides-extender.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale/classes/fsl-dynamic-packagearch.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta-poky/classes/poky-sanity.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package_rpm.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package_rpm.bbclass:1)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/packagedata.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:41)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/chrpath.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:42)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/insane.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:45)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/buildstats.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-mklibs.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/linuxloader.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-mklibs.bbclass:5)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-prelink.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/debian.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/devshell.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/sstate.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/license.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/remove-libtool.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/blacklist.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/sanity.bbclass (from configuration INHERITs:0)
+DEBUG: Clearing SRCREV cache due to cache policy of: clear
+DEBUG: Using cache in '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/cache/local_file_checksum_cache.dat'
+DEBUG: Using cache in '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/cache/bb_codeparser.dat'
+Running command ['updateConfig', {'debug_domains': [], 'abort': True, 'postfile': [], 'debug': 0, 'force': False, 'invalidate_stamp': None, 'dry_run': False, 'profile': False, 'prefile': [], 'dump_signatures': [], 'server_timeout': None, 'verbose': False, 'extra_assume_provided': []}, {'XDG_SESSION_ID': '1796', 'OECORE_DISTRO_VERSION': '4.9.88-2.0.0', 'LANGUAGE': 'en_US:', 'OECORE_TARGET_SYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'SHELL': '/bin/bash', 'HOME': '/home/zhouhui', 'CONFIG_SITE': '/opt/fsl-imx-wayland/4.9.88-2.0.0/site-config-cortexa7hf-neon-poky-linux-gnueabi', 'OBJCOPY': 'arm-poky-linux-gnueabi-objcopy', 'NM': 'arm-poky-linux-gnueabi-nm', 'CONFIGURE_FLAGS': '--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'CPPFLAGS': '', 'LD': 'arm-poky-linux-gnueabi-ld  --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'SSH_CONNECTION': '192.168.0.27 57022 192.168.0.8 22', 'OECORE_ACLOCAL_OPTS': '-I /opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/share/aclocal', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'BB_ENV_EXTRAWHITE': 'ALL_PROXY BBPATH_EXTRA BB_NO_NETWORK BB_NUMBER_THREADS BB_SETSCENE_ENFORCE BB_SRCREV_POLICY DISTRO FTPS_PROXY FTP_PROXY GIT_PROXY_COMMAND HTTPS_PROXY HTTP_PROXY MACHINE NO_PROXY PARALLEL_MAKE SCREENDIR SDKMACHINE SOCKS5_PASSWD SOCKS5_USER SSH_AGENT_PID SSH_AUTH_SOCK STAMPS_DIR TCLIBC TCMODE all_proxy ftp_proxy ftps_proxy http_proxy https_proxy no_proxy ', 'M4': 'm4', 'ARCH': 'arm', 'MAIL': '/var/mail/zhouhui', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'KCFLAGS': '--sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'GDB': 'arm-poky-linux-gnueabi-gdb', 'PATH': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/scripts:/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/bitbake/bin:/home/zhouhui/bin:/home/zhouhui/.local/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/sbin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/sbin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/../x86_64-pokysdk-linux/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musl:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'SHLVL': '1', 'CFLAGS': ' -O2 -pipe -g -feliminate-unused-debug-types ', 'STRIP': 'arm-poky-linux-gnueabi-strip', 'PWD': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/recipes-demo/app-smartlocker/smartlocker/tinylocker', 'TERMINFO_DIRS': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/../../etc/terminfo:/etc/terminfo:/usr/share/terminfo:/usr/share/misc/terminfo:/lib/terminfo', 'PKG_CONFIG_SYSROOT_DIR': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'SSH_CLIENT': '192.168.0.27 57022 22', 'BUILDDIR': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build', 'TERM': 'vt100', 'TARGET_PREFIX': 'arm-poky-linux-gnueabi-', 'RANLIB': 'arm-poky-linux-gnueabi-ranlib', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'LOGNAME': 'zhouhui', 'USER': 'zhouhui', 'LDFLAGS': '-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed', 'CXXFLAGS': ' -O2 -pipe -g -feliminate-unused-debug-types ', 'PKG_CONFIG_PATH': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/pkgconfig:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/share/pkgconfig', 'AS': 'arm-poky-linux-gnueabi-as ', 'AR': 'arm-poky-linux-gnueabi-ar', 'CC': 'arm-poky-linux-gnueabi-gcc  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'CPP': 'arm-poky-linux-gnueabi-gcc -E  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'LC_ALL': 'en_US.UTF-8', 'ARMGCC_DIR': '/home/zhouhui/tools/gcc-arm-none-eabi-6-2017-q2-update', 'CROSS_COMPILE': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-', 'LANG': 'en_US.UTF-8', 'OECORE_NATIVE_SYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux', 'SDKTARGETSYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'XDG_RUNTIME_DIR': '/run/user/1001', 'BBPATH': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build', 'CXX': 'arm-poky-linux-gnueabi-g++  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'SSH_TTY': '/dev/pts/0', 'OBJDUMP': 'arm-poky-linux-gnueabi-objdump'}, ['/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/bitbake/bin/bitbake', 'core-image-minimal']]
+Running command ['getVariable', 'BBINCLUDELOGS']
+Running command ['getVariable', 'BBINCLUDELOGS_LINES']
+Running command ['getSetVariable', 'BB_CONSOLELOG']
+Running command ['getUIHandlerNum']
+Running command ['setEventMask', 1, 20, {}, ['bb.runqueue.runQueueExitWait', 'bb.event.LogExecTTY', 'logging.LogRecord', 'bb.build.TaskFailed', 'bb.build.TaskBase', 'bb.event.ParseStarted', 'bb.event.ParseProgress', 'bb.event.ParseCompleted', 'bb.event.CacheLoadStarted', 'bb.event.CacheLoadProgress', 'bb.event.CacheLoadCompleted', 'bb.command.CommandFailed', 'bb.command.CommandExit', 'bb.command.CommandCompleted', 'bb.cooker.CookerExit', 'bb.event.MultipleProviders', 'bb.event.NoProvider', 'bb.runqueue.sceneQueueTaskStarted', 'bb.runqueue.runQueueTaskStarted', 'bb.runqueue.runQueueTaskFailed', 'bb.runqueue.sceneQueueTaskFailed', 'bb.event.BuildBase', 'bb.build.TaskStarted', 'bb.build.TaskSucceeded', 'bb.build.TaskFailedSilent', 'bb.build.TaskProgress', 'bb.event.ProcessStarted', 'bb.event.ProcessProgress', 'bb.event.ProcessFinished']]
+Running command ['getVariable', 'BB_DEFAULT_TASK']
+Running command ['setConfig', 'cmd', 'build']
+Running command ['buildTargets', ['core-image-minimal'], 'build']
+Connecting Client
+Disconnecting Client
+No timeout, exiting.
+Exiting
+--- Starting bitbake server pid 78026 at 2019-02-14 03:25:21.292037 ---
+Started bitbake server pid 78026
+DEBUG: Found bblayers.conf (/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/conf/bblayers.conf)
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta-poky
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-oe
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-multimedia
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale-3rdparty
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale-distro
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-browser
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-gnome
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-networking
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-python
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-openembedded/meta-filesystems
+DEBUG: Adding layer /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-qt5
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:740: including conf/abi_version.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:741: including conf/site.conf
+DEBUG: CONF file 'conf/site.conf' not found
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:742: including conf/auto.conf
+DEBUG: CONF file 'conf/auto.conf' not found
+Entering server connection loop
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:743: including conf/local.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:744: including conf/multiconfig/default.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:745: including conf/machine/imx7ulpevk.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/imx7ulpevk.conf:9: including conf/machine/include/imx-base.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/include/imx-base.inc:3: including conf/machine/include/fsl-default-settings.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/include/imx-base.inc:4: including conf/machine/include/fsl-default-versions.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/imx7ulpevk.conf:10: including conf/machine/include/tune-cortexa7.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/tune-cortexa7.inc:3: including conf/machine/include/arm/arch-armv7ve.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7ve.inc:8: including conf/machine/include/arm/arch-armv7a.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7a.inc:8: including conf/machine/include/arm/arch-armv6.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv6.inc:8: including conf/machine/include/arm/arch-armv5-dsp.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5-dsp.inc:4: including conf/machine/include/arm/arch-armv5.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5.inc:8: including conf/machine/include/arm/arch-armv4.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv4.inc:15: including conf/machine/include/arm/arch-arm.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv4.inc:16: including conf/machine/include/arm/feature-arm-thumb.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv5.inc:9: including conf/machine/include/arm/feature-arm-vfp.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/machine/include/arm/arch-armv7a.inc:9: including conf/machine/include/arm/feature-arm-neon.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:746: including conf/machine-sdk/x86_64.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:747: including conf/distro/fsl-imx-wayland.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/fsl-imx-wayland.conf:3: including conf/distro/include/fsl-imx-base.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/fsl-imx-wayland.conf:4: including conf/distro/include/fsl-imx-preferred-env.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:748: including conf/distro/defaultsetup.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:1: including conf/distro/include/default-providers.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:2: including conf/distro/include/default-versions.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:3: including conf/distro/include/default-distrovars.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:4: including conf/distro/include/world-broken.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:7: including conf/distro/include/tcmode-default.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/include/tcmode-default.inc:71: including conf/distro/include/as-needed.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:10: including conf/distro/include/tclibc-glibc.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/distro/defaultsetup.conf:12: including conf/distro/include/uninative-flags.inc
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:749: including conf/documentation.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:750: including conf/licenses.conf
+DEBUG: CONF /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/conf/bitbake.conf:751: including conf/sanity.conf
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/patch.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:4)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/terminal.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/patch.bbclass:11)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/staging.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:5)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/mirrors.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:7)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/utils.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:8)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/utility-tasks.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:9)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/metadata_scm.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:10)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/logging.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/base.bbclass:11)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale/classes/machine-overrides-extender.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-freescale/classes/fsl-dynamic-packagearch.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta-poky/classes/poky-sanity.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package_rpm.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package_rpm.bbclass:1)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/packagedata.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:41)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/chrpath.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:42)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/insane.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/package.bbclass:45)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/buildstats.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-mklibs.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/linuxloader.bbclass (from /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-mklibs.bbclass:5)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/image-prelink.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/debian.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/devshell.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/sstate.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/license.bbclass (from configuration INHERITs:0)
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/remove-libtool.bbclass (from configuration INHERITs:0)
+Accepting [<socket.socket fd=7, family=AddressFamily.AF_UNIX, type=SocketKind.SOCK_STREAM, proto=0, laddr=bitbake.sock>]
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/blacklist.bbclass (from configuration INHERITs:0)
+Connecting Client
+DEBUG: Inheriting /home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/meta/classes/sanity.bbclass (from configuration INHERITs:0)
+DEBUG: Clearing SRCREV cache due to cache policy of: clear
+DEBUG: Using cache in '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/cache/local_file_checksum_cache.dat'
+DEBUG: Using cache in '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build/cache/bb_codeparser.dat'
+Running command ['setFeatures', [2]]
+Running command ['updateConfig', {'debug_domains': [], 'extra_assume_provided': [], 'force': False, 'verbose': False, 'dump_signatures': [], 'dry_run': False, 'postfile': [], 'abort': True, 'profile': False, 'invalidate_stamp': None, 'prefile': [], 'server_timeout': None, 'debug': 0}, {'XDG_SESSION_ID': '1796', 'GDB': 'arm-poky-linux-gnueabi-gdb', 'USER': 'zhouhui', 'TERM': 'vt100', 'ARMGCC_DIR': '/home/zhouhui/tools/gcc-arm-none-eabi-6-2017-q2-update', 'LANG': 'en_US.UTF-8', 'CXXFLAGS': ' -O2 -pipe -g -feliminate-unused-debug-types ', 'TARGET_PREFIX': 'arm-poky-linux-gnueabi-', 'CPP': 'arm-poky-linux-gnueabi-gcc -E  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'HOME': '/home/zhouhui', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'OECORE_NATIVE_SYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux', 'SHELL': '/bin/bash', 'KCFLAGS': '--sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'MAIL': '/var/mail/zhouhui', 'CFLAGS': ' -O2 -pipe -g -feliminate-unused-debug-types ', 'OECORE_TARGET_SYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'PKG_CONFIG_SYSROOT_DIR': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'ARCH': 'arm', 'OBJDUMP': 'arm-poky-linux-gnueabi-objdump', 'CONFIGURE_FLAGS': '--target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'OECORE_ACLOCAL_OPTS': '-I /opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/share/aclocal', 'BBPATH': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build', 'PWD': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/meta-fsl-bsp-release/imx/meta-bsp/recipes-demo/app-smartlocker/smartlocker/tinylocker', 'LDFLAGS': '-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed', 'SSH_CONNECTION': '192.168.0.27 57022 192.168.0.8 22', 'CXX': 'arm-poky-linux-gnueabi-g++  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'PKG_CONFIG_PATH': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/pkgconfig:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/share/pkgconfig', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'TERMINFO_DIRS': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/../../etc/terminfo:/etc/terminfo:/usr/share/terminfo:/usr/share/misc/terminfo:/lib/terminfo', 'STRIP': 'arm-poky-linux-gnueabi-strip', 'OBJCOPY': 'arm-poky-linux-gnueabi-objcopy', 'SDKTARGETSYSROOT': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'CONFIG_SITE': '/opt/fsl-imx-wayland/4.9.88-2.0.0/site-config-cortexa7hf-neon-poky-linux-gnueabi', 'SSH_CLIENT': '192.168.0.27 57022 22', 'LC_ALL': 'en_US.UTF-8', 'BB_ENV_EXTRAWHITE': 'ALL_PROXY BBPATH_EXTRA BB_NO_NETWORK BB_NUMBER_THREADS BB_SETSCENE_ENFORCE BB_SRCREV_POLICY DISTRO FTPS_PROXY FTP_PROXY GIT_PROXY_COMMAND HTTPS_PROXY HTTP_PROXY MACHINE NO_PROXY PARALLEL_MAKE SCREENDIR SDKMACHINE SOCKS5_PASSWD SOCKS5_USER SSH_AGENT_PID SSH_AUTH_SOCK STAMPS_DIR TCLIBC TCMODE all_proxy ftp_proxy ftps_proxy http_proxy https_proxy no_proxy ', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'NM': 'arm-poky-linux-gnueabi-nm', 'LD': 'arm-poky-linux-gnueabi-ld  --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'PATH': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/scripts:/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/bitbake/bin:/home/zhouhui/bin:/home/zhouhui/.local/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/sbin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/sbin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/../x86_64-pokysdk-linux/bin:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi:/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-musl:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'CROSS_COMPILE': '/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-', 'RANLIB': 'arm-poky-linux-gnueabi-ranlib', 'OECORE_DISTRO_VERSION': '4.9.88-2.0.0', 'AS': 'arm-poky-linux-gnueabi-as ', 'AR': 'arm-poky-linux-gnueabi-ar', 'M4': 'm4', 'XDG_RUNTIME_DIR': '/run/user/1001', 'BUILDDIR': '/home/zhouhui/work/imx7ulp/imx-yocto-bsp/build', 'CPPFLAGS': '', 'LANGUAGE': 'en_US:', 'CC': 'arm-poky-linux-gnueabi-gcc  -march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-wayland/4.9.88-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'LOGNAME': 'zhouhui', 'SHLVL': '1', 'SSH_TTY': '/dev/pts/0'}, ['/home/zhouhui/work/imx7ulp/imx-yocto-bsp/sources/poky/bitbake/bin/bitbake', 'core-image-minimal']]
+Running command ['getVariable', 'BBINCLUDELOGS']
+Running command ['getVariable', 'BBINCLUDELOGS_LINES']
+Running command ['getSetVariable', 'BB_CONSOLELOG']
+Running command ['getUIHandlerNum']
+Running command ['setEventMask', 1, 20, {}, ['bb.runqueue.runQueueExitWait', 'bb.event.LogExecTTY', 'logging.LogRecord', 'bb.build.TaskFailed', 'bb.build.TaskBase', 'bb.event.ParseStarted', 'bb.event.ParseProgress', 'bb.event.ParseCompleted', 'bb.event.CacheLoadStarted', 'bb.event.CacheLoadProgress', 'bb.event.CacheLoadCompleted', 'bb.command.CommandFailed', 'bb.command.CommandExit', 'bb.command.CommandCompleted', 'bb.cooker.CookerExit', 'bb.event.MultipleProviders', 'bb.event.NoProvider', 'bb.runqueue.sceneQueueTaskStarted', 'bb.runqueue.runQueueTaskStarted', 'bb.runqueue.runQueueTaskFailed', 'bb.runqueue.sceneQueueTaskFailed', 'bb.event.BuildBase', 'bb.build.TaskStarted', 'bb.build.TaskSucceeded', 'bb.build.TaskFailedSilent', 'bb.build.TaskProgress', 'bb.event.ProcessStarted', 'bb.event.ProcessProgress', 'bb.event.ProcessFinished']]
+Running command ['getVariable', 'BB_DEFAULT_TASK']
+Running command ['setConfig', 'cmd', 'build']
+Running command ['buildTargets', ['core-image-minimal'], 'build']
+Connecting Client
+Disconnecting Client
+No timeout, exiting.
+Exiting

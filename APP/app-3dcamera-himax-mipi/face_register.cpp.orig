@@ -1,0 +1,523 @@
+/*
+ * Copyright 2018 NXP Semiconductor, Inc. All rights reserved.
+ */
+
+/*
+ * The code contained herein is licensed under the GNU General Public
+ * License. You may obtain a copy of the GNU General Public License
+ * Version 2 or later at the following locations:
+ *
+ * http://www.opensource.org/licenses/gpl-license.html
+ * http://www.gnu.org/copyleft/gpl.html
+ */
+
+#include "libyuv.h"
+#include "libsimplelog.h"
+#include "cam_ctrl.h"
+#include "fb_ctrl.h"
+#include "face_alg.h"
+#include "per_calc.h"
+#include "bmp_banner.h"
+#include "config.h"
+#include "sig_timer.h"
+
+#include <errno.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <linux/fb.h>
+#include <linux/videodev2.h>
+#include <linux/input.h>
+
+using namespace std;
+
+#define KEY_EVENT_DEV_NAME		"/dev/input/event0"
+
+struct faceBuffer {
+	uint8_t ir_buf[CFG_FACE_LIB_IR_IMAGE_SIZE];
+	uint8_t ir_filled;
+#if CFG_FACE_BIN_LIVENESS
+	uint8_t depth_buf[CFG_FACE_LIB_DEPTH_IMAGE_SIZE];
+	uint8_t depth_filled;
+#endif
+	pthread_mutex_t buf_mutex;
+	pthread_cond_t buf_cond;
+};
+
+static cam_ctrl_t gcam_ctrl;
+
+#if CFG_ENABLE_PREVIEW
+static uint8_t preview_buffer32[CFG_IR_FRAME_WIDTH * CFG_IR_FRAME_HEIGHT * 4];
+	#if (CFG_PREVIRW_LCD_BPP == 16)
+static uint8_t preview_buffer16[CFG_IR_FRAME_WIDTH * CFG_IR_FRAME_HEIGHT * 2];
+	#endif
+#endif
+
+#if (CFG_USE_INTERNAL_BUFFER_QUEUE == 0)
+static uint8_t g_ir_frm_buf[CFG_IR_FRAME_SIZE];
+	#if CFG_FACE_BIN_LIVENESS
+static uint8_t g_depth_frm_buf[CFG_DEPTH_FRAME_SIZE];
+	#endif //CFG_FACE_BIN_LIVENESS
+#endif //CFG_USE_INTERNAL_BUFFER_QUEUE
+#if CFG_ENABLE_PREVIEW
+static uint32_t lcd_ir_preview_flag = 0;
+#endif
+
+static struct faceBuffer faceBuf;
+
+static bool detectRun = true;
+static bool previewRun = true;
+
+#if CFG_ENABLE_APP_EXIT_FROM_TIMER
+static void face_register_run_timer_cb(void)
+{
+	log_info("app run timeout, exit!\n");
+	detectRun = false;
+}
+#endif
+
+static void *face_register_detect_proc(void *arg)
+{
+	int32_t ret_val = RET_NO_FACE;
+	face_image_info_t ir_img = {
+		faceBuf.ir_buf,
+		CFG_FACE_LIB_FRAME_WIDTH,
+		CFG_FACE_LIB_FRAME_HEIGHT,
+		(CFG_FACE_LIB_FRAME_WIDTH * CFG_FACE_LIB_PIX_FMT_BPP) >> 3,
+	};
+#if CFG_FACE_BIN_LIVENESS
+	face_image_info_t depth_img = {
+		faceBuf.depth_buf,
+		CFG_FACE_LIB_FRAME_WIDTH,
+		CFG_FACE_LIB_FRAME_HEIGHT,
+		(CFG_FACE_LIB_FRAME_WIDTH * CFG_FACE_LIB_DEPTH_PIX_FMT_BPP) >> 3,
+	};
+#endif
+
+	while (detectRun) {
+		// wait for buffer ready
+		if ((1 == faceBuf.ir_filled)
+#if CFG_FACE_BIN_LIVENESS
+			&& (1 == faceBuf.depth_filled)
+#endif
+			) {
+			// lock buffer to do face algorithm
+			pthread_mutex_lock(&faceBuf.buf_mutex);
+		} else {
+			// lock buffer to do face algorithm
+			pthread_mutex_lock(&faceBuf.buf_mutex);
+			pthread_cond_wait(&faceBuf.buf_cond, &faceBuf.buf_mutex);
+		}
+
+#if CFG_PER_TIME_CAL_OVERALL
+		per_calc_start();
+#endif
+
+#if CFG_FACE_BIN_LIVENESS
+		ret_val = face_alg_register(&ir_img, &depth_img);
+		faceBuf.depth_filled = 0;
+#else
+		ret_val = face_alg_register(&ir_img);
+#endif
+		faceBuf.ir_filled = 0;
+		pthread_mutex_unlock(&faceBuf.buf_mutex);
+#if CFG_PER_TIME_CAL_OVERALL
+		per_calc_end();
+		log_info("Face register: %d usec\n", per_calc_get_result());
+#endif
+		log_set_color(1);
+		switch (ret_val) {
+		case RET_OK:
+			bmp_banner_set(BANNER_REGISTER_OK);
+			log_fatal("face registered!");
+			detectRun = false;
+			break;
+		case RET_NO_FACE:
+			bmp_banner_set(BANNER_REGISTERING);
+			log_warn("No face detected!\n");
+			break;
+		case RET_NO_LIVENESS:
+			bmp_banner_set(BANNER_LIVENESS_FAIL);
+			log_info("liveness check failed!\n");
+			break;
+		case RET_ALREADY_IN_DATABASE:
+			bmp_banner_set(BANNER_REGISTERED);
+			log_info("face already exists!\n");
+			detectRun = false;
+			break;
+		case RET_NO_QUALITY:
+			bmp_banner_set(BANNER_REGISTERING);
+			log_warn("quality too low!\n");
+		default:
+			break;
+		}
+		log_set_color(0);
+	}
+
+	face_alg_deinit();
+
+	return NULL;
+}
+
+static void *face_register_preview_proc(void *arg)
+{
+	int32_t cur_stream_type = STREAM_IR;
+
+#if CFG_ENABLE_PREVIEW
+	int32_t fbfd = 0;
+	uint8_t *fbBase = NULL;
+	struct fb_var_screeninfo var;
+	int32_t fbIndex = 0, fbBufSize = 0;
+	uint32_t lcd_bpp = 0;
+
+	if (lcd_ir_preview_flag) {
+		if (fb_ctrl_fbSinkInit(&fbfd, &fbBase, &var)) {
+			log_error("fbSink init failed\n");
+			return NULL;
+		}
+
+		lcd_bpp = var.bits_per_pixel / 8;
+		fbBufSize = var.xres * var.yres * lcd_bpp;
+#if CFG_ENABLE_PREVIRW_BANNER
+		bmp_banner_init(
+				(uint32_t)(fbBase + fbBufSize - var.xres * 100 * var.bits_per_pixel / 8),
+				(uint32_t)(fbBase + 2 * fbBufSize - var.xres * 100 * var.bits_per_pixel / 8),
+				BANNER_REGISTERING);
+#endif
+	}
+#endif
+
+	// stream on
+	if (cam_ctrl_start_stream(&gcam_ctrl)) {
+		log_error("cam ctrl start failed\n");
+		cam_ctrl_deinit(&gcam_ctrl);
+#if CFG_ENABLE_PREVIEW
+		if (lcd_ir_preview_flag) {
+			fb_ctrl_fbSinkUninit(fbfd, fbBase, fbBufSize * 2);
+		}
+#endif
+		return NULL;
+	}
+
+	while (previewRun) {
+		uint8_t *data_ptr = NULL;
+
+		switch (cur_stream_type) {
+		case STREAM_IR:
+			{
+#if CFG_USE_INTERNAL_BUFFER_QUEUE
+				cam_ctrl_deq_frame_data_ptr(&gcam_ctrl, &data_ptr, FRAME_TYPE_IR);
+#else
+				data_ptr = (uint8_t *)g_ir_frm_buf;
+				cam_ctrl_get_frame_data(&gcam_ctrl, data_ptr, FRAME_TYPE_IR);
+#endif
+
+				if (!faceBuf.ir_filled && pthread_mutex_trylock(&faceBuf.buf_mutex)) {
+					uint8_t *tmp_buf_ptr = faceBuf.ir_buf;
+#if CFG_FACE_BIN_LIVENESS
+#if (CFG_USE_ALTERNATIVE_MODE == 0)
+					if (RET_OK == cam_ctrl_enable_depth(&gcam_ctrl)) {
+						cur_stream_type = STREAM_DEPTH;
+						log_debug("change to depth success!\n");
+					} else {
+						log_error("change to depth fail!\n");
+						break;
+					}
+#else //CFG_USE_ALTERNATIVE_MODE
+					cur_stream_type = STREAM_DEPTH;
+#endif // CFG_USE_ALTERNATIVE_MODE
+#endif // CFG_FACE_BIN_LIVENESS
+
+					cam_ctrl_cvt_to_gray(&gcam_ctrl, data_ptr, tmp_buf_ptr, CFG_FACE_LIB_FRAME_WIDTH, CFG_FACE_LIB_FRAME_HEIGHT);
+
+					faceBuf.ir_filled = 1;
+					pthread_mutex_unlock(&faceBuf.buf_mutex);
+					// signal to face detect thread
+					//pthread_cond_signal(&faceBuf.buf_cond);
+				}
+
+#if CFG_ENABLE_PREVIEW
+				if (lcd_ir_preview_flag) {
+					cam_ctrl_cvt_to_argb(&gcam_ctrl, data_ptr, preview_buffer32,
+							CFG_IR_FRAME_WIDTH, CFG_IR_FRAME_HEIGHT);
+					// directly blit to screen fb
+#if (CFG_PREVIRW_LCD_BPP == 32)
+					fb_ctrl_blitToFB(fbBase + fbIndex * fbBufSize, var.xres, var.yres,
+							preview_buffer32, CFG_PREVIRW_LCD_BPP >> 3, CFG_IR_FRAME_WIDTH, CFG_IR_FRAME_HEIGHT);
+#elif (CFG_PREVIRW_LCD_BPP == 16)
+					libyuv::ARGBToRGB565(preview_buffer32, CFG_IR_FRAME_WIDTH * 4, preview_buffer16, CFG_IR_FRAME_WIDTH * 2, CFG_IR_FRAME_WIDTH, CFG_IR_FRAME_HEIGHT);
+					fb_ctrl_blitToFB(fbBase + fbIndex * fbBufSize, var.xres, var.yres,
+							preview_buffer16, CFG_PREVIRW_LCD_BPP >> 3, CFG_IR_FRAME_WIDTH, CFG_IR_FRAME_HEIGHT);
+#endif
+					var.yoffset = var.yres * fbIndex;
+#if CFG_ENABLE_PREVIRW_BANNER
+					bmp_banner_update(fbIndex);
+#endif
+					ioctl(fbfd, FBIOPAN_DISPLAY, &var);
+					fbIndex = !fbIndex;
+				}
+#endif
+			}
+	  		break;
+#if CFG_FACE_BIN_LIVENESS
+			case STREAM_DEPTH:
+			{
+#if CFG_USE_INTERNAL_BUFFER_QUEUE
+				cam_ctrl_deq_frame_data_ptr(&gcam_ctrl, &data_ptr, FRAME_TYPE_DEPTH);
+#else
+				data_ptr = (uint8_t *)g_depth_frm_buf;
+				cam_ctrl_get_frame_data(&gcam_ctrl, data_ptr, FRAME_TYPE_DEPTH);
+#endif
+
+				if (!faceBuf.depth_filled && pthread_mutex_trylock(&faceBuf.buf_mutex)) {
+#if (CFG_USE_ALTERNATIVE_MODE == 0)
+					if (RET_OK == cam_ctrl_enable_ir(&gcam_ctrl)) {
+						cur_stream_type = STREAM_IR;
+						log_debug("change to ir success!\n");
+					} else {
+						log_error("change to ir fail!\n");
+						break;
+					}
+#else
+					cur_stream_type = STREAM_IR;
+#endif
+
+					cam_ctrl_cvt_to_depth(&gcam_ctrl, (uint16_t *)data_ptr, (uint16_t *)faceBuf.depth_buf,
+							CFG_FACE_LIB_FRAME_WIDTH, CFG_FACE_LIB_FRAME_HEIGHT);
+					faceBuf.depth_filled = 1;
+					pthread_mutex_unlock(&faceBuf.buf_mutex);
+					pthread_cond_signal(&faceBuf.buf_cond);
+				}
+			}
+			break;
+#endif
+			default:
+			break;
+		}
+#if CFG_USE_INTERNAL_BUFFER_QUEUE
+		cam_ctrl_q_frame_data_ptr(&gcam_ctrl);
+#endif
+	}
+
+	cam_ctrl_stop_stream(&gcam_ctrl);
+	cam_ctrl_deinit(&gcam_ctrl);
+
+#if CFG_ENABLE_PREVIEW
+	if (lcd_ir_preview_flag) {
+		fb_ctrl_fbSinkUninit(fbfd, fbBase, fbBufSize * 2);
+	}
+#endif
+
+	return NULL;
+}
+
+int main(int argc, char **argv)
+{
+	int32_t err;
+	pthread_t detect_thread_id = 0, preview_thread_id = 0;
+	int32_t *pdet_thr_ret = NULL, *ppre_thr_ret = NULL;
+	face_alg_param_t facelib_param;
+	cam_ctrl_init_t cam_init_data;
+	int32_t ret = 0;
+
+#if CFG_ENABLE_V4L2_SUPPORT
+	char v4l2_dev[30] = "/dev/video0";
+#endif
+#if CFG_ENABLE_CAM_I2C
+	char i2c_dev[30] = { 0 };
+#endif
+
+#if CFG_PER_TIME_CAL_INIT_OVERALL
+	per_calc_start();
+#endif
+
+	// Set the log level
+	log_set_level(LOG_INFO);
+	log_set_simple(1);
+
+	faceBuf.ir_filled = false;
+	pthread_mutex_init(&faceBuf.buf_mutex, NULL);
+	pthread_cond_init(&faceBuf.buf_cond, NULL);
+#if CFG_FACE_BIN_LIVENESS
+	faceBuf.depth_filled = false;
+#endif
+
+	memset(&facelib_param, 0, sizeof(face_alg_param_t));
+	facelib_param.quality_flag = 1;
+	facelib_param.face_landarks_flag = 1;
+	facelib_param.confidence = CFG_FACE_FEATURE_REGISTER_SIMILAR_THRESHHOLD;
+	while ((argc > 1) && (argv[1][0] == '-')) {
+		switch (argv[1][1]) {
+#if CFG_ENABLE_PREVIEW
+		case 'p':
+			/* Preview on LCD */
+			lcd_ir_preview_flag = 1;
+			break;
+#endif
+#if CFG_LIVENESS_DETECT_SUPPORT
+		case 'l':
+			/* Liveness check */
+			facelib_param.living_detect_flag = 1;
+			break;
+#endif
+		case 'a':
+			/* Angle check */
+			facelib_param.face_landarks_flag = 1;
+			break;
+		case 'b':
+			/* Blink check */
+			facelib_param.blink_flag = 1;
+			break;
+		case 'q':
+			break;
+#if CFG_ENABLE_V4L2_SUPPORT
+		case 'd':
+			memset(v4l2_dev, 0, sizeof(v4l2_dev));
+			strcpy(v4l2_dev, argv[2]);
+			++argv;
+			--argc;
+			break;
+#endif
+		case 't':
+			/* Thread count */
+			facelib_param.thread_counts_flag = 1;
+			facelib_param.thread_counts = atoi(argv[2]);
+			++argv;
+			--argc;
+			break;
+		case 'm':
+			facelib_param.min_face_size_flag = 1;
+			facelib_param.min_face_size = atoi(argv[2]);
+			++argv;
+			--argc;
+			break;
+		case 'D':
+			log_set_level(LOG_DEBUG);
+			break;
+		default:
+			log_info("Unknown option %s", argv[1]);
+			goto err_rtn;
+        }
+        ++argv;
+        --argc;
+    }
+
+#if CFG_ENABLE_APP_EXIT_FROM_TIMER
+	if (sig_timer_init()) {
+		log_error("Failed to init signal timer\n");
+		goto err_rtn;
+	}
+#endif
+
+#if CFG_PER_TIME_CAL_INIT_EVERYSTEP
+	per_calc_start();
+#endif
+
+	if (face_alg_init(&facelib_param)) {
+		log_error("Failed to init the face lib\n");
+		goto err_rtn;
+	}
+#if CFG_PER_TIME_CAL_INIT_EVERYSTEP
+	per_calc_end();
+	log_info("face_alg_init: %d usec\n", per_calc_get_result());
+#endif
+
+#if CFG_PER_TIME_CAL_INIT_EVERYSTEP
+	per_calc_start();
+#endif
+
+	// Init camera
+#if CFG_ENABLE_V4L2_SUPPORT
+	cam_init_data.v4l2_dev = v4l2_dev;
+	cam_init_data.fmt = CFG_V4L2_PIX_FMT;
+#endif
+#if CFG_ENABLE_CAM_I2C
+	strcpy(i2c_dev, CFG_CAM_I2C_DEV);
+	cam_init_data.i2c_dev = i2c_dev;
+	cam_init_data.i2c_slave_addr = CFG_CAM_I2C_SLAVE_ADDR;
+#endif
+#if CFG_ENABLE_CAM_LIBUVC
+	cam_init_data.vid = CFG_DEVICE_VENDOR_ID;
+	cam_init_data.pid = CFG_DEVICE_PRODUCT_ID;
+#endif
+	cam_init_data.fmt = CFG_V4L2_PIX_FMT;
+	cam_init_data.width = CFG_CAM_WIDTH;
+	cam_init_data.height = CFG_CAM_HEIGHT;
+	ret = cam_ctrl_init(&cam_init_data, &gcam_ctrl);
+	if (ret) {
+		goto err_rtn;
+	}
+#if CFG_PER_TIME_CAL_INIT_EVERYSTEP
+	per_calc_end();
+	log_info("cam_init: %d usec\n", per_calc_get_result());
+#endif
+
+	ret = cam_ctrl_config_ir(&gcam_ctrl, CFG_IR_FRAME_WIDTH, CFG_IR_FRAME_HEIGHT, CFG_IR_FPS);
+	if (ret) {
+		goto err_rtn;
+	}
+
+	ret = cam_ctrl_config_depth(&gcam_ctrl, CFG_DEPTH_FRAME_WIDTH, CFG_DEPTH_FRAME_HEIGHT, CFG_DEPTH_FPS);
+	if (ret) {
+		goto err_rtn;
+	}
+
+#if (CFG_USE_ALTERNATIVE_MODE == 1)
+	if (RET_OK != cam_ctrl_enable_ir_and_depth(&gcam_ctrl)) {
+		log_debug("Failed to set IR and Depth stream!\n");
+		goto err_rtn;
+	}
+#else
+	if (RET_OK != cam_ctrl_enable_ir(&gcam_ctrl)) {
+		log_debug("Failed to set IR stream!\n");
+		goto err_rtn;
+	}
+#endif
+
+#if CFG_PER_TIME_CAL_INIT_OVERALL
+	per_calc_end();
+	log_info("Init proc: %d usec\n", per_calc_get_result());
+#endif
+
+	err = pthread_create(&detect_thread_id, NULL, face_register_detect_proc, NULL);
+	if (err != 0) {
+		log_error("Failed to create detect thread.errno:%u, reason:%s\n",
+				errno, strerror(errno));
+		goto err_rtn;
+	}
+
+	err = pthread_create(&preview_thread_id, NULL, face_register_preview_proc, NULL);
+	if (err != 0) {
+		log_error("Failed to create preview thread.errno:%u, reason:%s\n",
+				errno, strerror(errno));
+		goto err_rtn;
+	}
+
+#if CFG_ENABLE_APP_EXIT_FROM_TIMER
+	sig_timer_start(CFG_APP_EXIT_TIMEOUT_MS, face_register_run_timer_cb);
+#endif
+
+	pthread_join(detect_thread_id, (void **)&pdet_thr_ret);
+	previewRun = false;
+	pthread_join(preview_thread_id, (void **)&ppre_thr_ret);
+
+	pthread_mutex_destroy(&faceBuf.buf_mutex);
+
+	return 0;
+err_rtn:
+	cam_ctrl_deinit(&gcam_ctrl);
+	if (detect_thread_id)
+		pthread_cancel(detect_thread_id);
+	if (preview_thread_id)
+		pthread_cancel(preview_thread_id);
+	pthread_mutex_destroy(&faceBuf.buf_mutex);
+	return 1;
+}
+

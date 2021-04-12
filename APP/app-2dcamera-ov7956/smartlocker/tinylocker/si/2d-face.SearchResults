@@ -1,0 +1,2 @@
+---- orbbec-camera Matches (1 in 1 files) ----
+Faceloop.cpp:			system("mv -f /home/root/update_dir/orbbec-camera/*   /opt/smartlocker/");

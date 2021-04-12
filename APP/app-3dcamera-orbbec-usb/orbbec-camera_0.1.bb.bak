@@ -1,0 +1,49 @@
+SUMMARY = "APP-ORBBEC-CAMERA"
+DESCRIPTION = "This is a orbbec camera Demo"
+HOMEPAGE = "http://quitcoding.com/?page=work#cinex"
+
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+#inherit deploy
+
+
+SRC_URI = " \
+	file://camerademo \
+	"
+SRCREV = "${AUTOREV}"
+
+S = "${WORKDIR}/camerademo"
+
+
+do_compile() {
+	cd ${S}
+	make 
+}
+
+do_install() {
+	install -d "${D}/opt/${PN}"
+	install -d "${D}/etc/init.d"
+	install -d "${D}/etc/udev/rules.d"
+	install -d "${D}/${libdir}"
+	install -m 0755 ${B}/orbbec_rs_recg_face ${D}/opt/${PN}
+	install -m 0755 ${B}/orbbec_rs_reg_face ${D}/opt/${PN}
+	install -m 0755 ${B}/libopenni/56-orbbec-usb.rules ${D}${sysconfdir}/udev/rules.d
+#	install -m 0755 ${B}/face_reg.sh ${D}/opt/${PN}
+#	install -m 0755 ${B}/face_recg.sh ${D}/opt/${PN}	
+#	install -m 0755 ${B}/rcS ${D}${sysconfdir}/init.d/rcS
+#	install -m 0755 ${B}/rcK ${D}${sysconfdir}/init.d/rcK
+	cp ${S}/librs/libReadFace.so ${D}/${libdir}
+	cp ${S}/libyuv/libyuv.a ${D}/${libdir}
+#	cp -R ${S}/libopenni/arm/Arm-Release-without-filter/OpenNI2/ ${D}/${libdir}	
+	cp ${S}/libopenni/arm/Arm-Release-without-filter/libDepthUtils.a ${D}/${libdir}
+	cp ${S}/libopenni/arm/Arm-Release-without-filter/libOpenNI2.so ${D}/${libdir}
+#	cp ${S}/libopenni/arm/Arm-Release-without-filter/OpenNI.ini ${D}/${libdir}
+}
+
+do_package_qa[noexec] = "1"
+INSANE_SKIP_${PN}_append = "already-stripped"
+
+FILES_${PN} += "opt/${PN}"
+
+COMPATIBLE_MACHINE = "(mx7ulp)"

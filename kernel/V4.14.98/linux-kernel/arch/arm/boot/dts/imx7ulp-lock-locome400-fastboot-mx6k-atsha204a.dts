@@ -1,0 +1,28 @@
+/*
+ * Copyright 2016 Freescale Semiconductor, Inc.
+ * Copyright 2017 NXP.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+
+#include "imx7ulp-lock-locome400-fastboot-mx6k.dts"
+
+&lpi2c6 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&pinctrl_lpi2c6>;
+	pinctrl-1 = <&pinctrl_lpi2c6_sleep>;
+	clock-frequency = <400000>;
+	status = "okay";
+
+	atsha204a: atsha204a@64 {
+		compatible = "atmel,atsha204a";
+		reg = <0x64>;
+		sda-gpios = <&gpio_ptc 9 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
+};

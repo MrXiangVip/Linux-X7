@@ -1,0 +1,36 @@
+#!/bin/sh
+
+file1="/proc/face/face_detec"
+file2="/proc/face/face_reg"
+file3="/proc/face/face_delid"
+file4="/proc/face/face_deldb"
+
+while true
+do
+    echo "---Enter face_loop: 20190312"
+    sleep 1  
+    if [ -f "$file1" ];
+    then
+        echo "Enter face recognize..."
+        cd /opt/orbbec-camera
+        ./orbbec_rs_recg_face 1
+    elif [ -f "$file2" ];
+    then
+        echo "Enter face register..."
+        cd /opt/orbbec-camera
+        ./orbbec_rs_reg_face 1
+    elif [ -f "$file3" ];
+    then
+        echo "Enter face delete..."
+        
+    elif [ -f "$file4" ];
+    then
+        echo "Delete the whole database!"
+        rm /opt/orbbec-camera/readsense.db
+    fi
+
+    echo "No more operation, A7 will enter VLLS!"
+    sleep 1
+    echo mem > /sys/power/state
+done
+
