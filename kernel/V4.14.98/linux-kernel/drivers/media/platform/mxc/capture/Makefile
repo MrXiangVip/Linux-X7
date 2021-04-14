@@ -49,5 +49,8 @@ obj-$(CONFIG_MXC_CAMERA_MX6000) += mx6000_camera.o
 ov7725_camera-objs := ov7725.o
 obj-$(CONFIG_MXC_CAMERA_OV7725) += ov7725_camera.o
 
+gc0328_camera-objs := gc0328.o
+obj-$(CONFIG_MXC_CAMERA_GC0328) += gc0328_camera.o
+
 qh430mr_camera-objs := qh430mr.o
 obj-$(CONFIG_MXC_CAMERA_QH430MR) += qh430mr_camera.o

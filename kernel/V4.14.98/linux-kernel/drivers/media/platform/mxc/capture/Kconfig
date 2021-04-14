@@ -93,6 +93,12 @@ config MXC_CAMERA_OV7725
 	---help---
 	  If you plan to use the OV7725 MIPI-to-DVP Camera with your MXC system, say Y here.
 
+config MXC_CAMERA_GC0328
+	tristate "Orbbec GC0328 MIPI-to-DVP camera support"
+	depends on VIDEO_MXC_CAPTURE && I2C
+	---help---
+	  If you plan to use the GC0328 MIPI-to-DVP Camera with your MXC system, say Y here.
+
 config MXC_CAMERA_QH430MR
 	tristate "HiMAX MX6000 MIPI-to-DVP camera support"
 	depends on VIDEO_MXC_CAPTURE && I2C

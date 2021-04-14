@@ -675,6 +675,7 @@ dtb-$(CONFIG_SOC_IMX7ULP) += \
 	imx7ulp-lock-locome400-fastboot-ov7956.dtb \
 	imx7ulp-lock-el2-st7789.dtb \
 	imx7ulp-lock-el2-fastboot-ov7725-ST7789.dtb \
+	imx7ulp-lock-el2-fastboot-gc0328-ST7789.dtb \
 	imx7ulp-toy.dtb \
 	imx7ulp-toy-emmc.dtb \
 	imx7ulp-toy-sd1.dtb \
