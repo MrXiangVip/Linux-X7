@@ -151,28 +151,8 @@ REG_UserFace_State PersonFaceManager::registerFaceFt(int person_id, SFaceFt* fac
 	} 
 	else 
 	{
-		// cout << "注册用户" << person_id << "已经存在" << endl;
-        PersonFace person = it->second;
-        if( memcmp( pUU_ID, &person.uu_id, sizeof(uUID)) == 0 )
-        {
-            log_info("UUID  %s existes\n", pUU_ID);
-            person.face = faceFt;
-            int ret = savePersonFaceMgr();
-            if (!ret)
-            {
-                // cerr << "保存数据失败" << endl;
-                cerr << "Failed to save data" << endl;
-                return Pf_DB_SAVE_FAILD;
-            }
-            // cout << "注册用户" << person_id << "成功，当前用户数" << m_person_faces.size() << endl;
-            cout << "register PersonID:" << person_id << " successfully，current user number " << m_person_faces.size() << endl;
-            return Pf_REG_USER_OK;
-
-        }else{
-            return Pf_ALREAD_EXIT;
-
-        }
-
+		 cout << "注册用户" << person_id << "已经存在" << endl;
+		 return Pf_ALREAD_EXIT;
 	}
 }
 
