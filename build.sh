@@ -2,8 +2,10 @@
 display_help()
 {
 	echo "Usage:"
-	echo "        build.sh       :编译app和kernel"
-	echo "        build.sh  clean:清理app和kernel"
+	echo "        build.sh          :编译app和kernel"
+	echo "        build.sh    app   :编译app"
+	echo "        build.sh    kernel:编译kernel"
+	echo "        build.sh    clean :清理app和kernel"
 }
 
 build_app()
@@ -12,11 +14,11 @@ build_app()
   cd $VPATH
   cd $VPATH/APP/app-2dcamera-ov7725;
   make
-  echo "拷贝APP"
-  cp  face_loop   $OUT
-  cp  face_register   $OUT
-  cp  face_recognize   $OUT
-  cp  mqtt          $OUT
+  echo "拷贝APP到rootfs"
+  cp  face_loop   $VPATH/rootfs/opt/smartlocker/face_loop
+  cp  face_register   $VPATH/rootfs/opt/smartlocker/face_register
+  cp  face_recognize   $VPATH/rootfs/opt/smartlocker/face_recognize
+  cp  mqtt   $VPATH/rootfs/opt/smartlocker/mqtt
 }
 clean_app()
 {
@@ -47,18 +49,14 @@ clean_kernel()
 }
 pack_version()
 {
-  echo "打包版本"
-  cd $OUT
-  pwd
+  echo "打包版本.."
+  cd $VPATH/rootfs
   echo "打包文件系统"
-  tar -xjf rootfs.tar.bz2 ./
-  mv  face_loop       ./opt/smartlocker
-  mv  face_register   ./opt/smartlocker
-  mv  face_recognize  ./opt/smartlocker
-  mv  mqtt            ./opt/smartlocker
-  rm rootfs.tar.bz2
-  tar -cjf   rootfs.tar.bz2  ./bin  ./boot ./dev ./etc ./home ./lib ./media ./mnt ./opt ./proc ./run ./sbin ./sys ./tmp ./usr ./var
-  rm -rf ./bin  ./boot ./dev ./etc ./home ./lib ./media ./mnt ./opt ./proc ./run ./sbin ./sys ./tmp ./usr ./var
+  if [ -f "rootfs.tar.bz2" ];then
+    rm rootfs.tar.bz2
+  fi
+  tar -cjf rootfs.tar.bz2 ./
+  mv rootfs.tar.bz2 $OUT
 
 #  echo "打包压缩包"
 #  cd $VPATH
@@ -97,7 +95,11 @@ do_main()
 	if [ "${command}" = "clean" ]; then
     clean_app
     clean_kernel
-	else
+	elif [ "${command}" = "app" ]; then
+    build_app
+  elif [ "${command}" = "kernel" ]; then
+    build_kernel
+  else
     display_help
   fi
 }
